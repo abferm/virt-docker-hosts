@@ -15,5 +15,6 @@ RUN qemu-img resize ubuntu.img +6G
 ADD setup.sh ./
 RUN ./setup.sh
 
+ENV PORT=2376
 # Boot VM
-CMD qemu-system-aarch64 -m 1024 -cpu cortex-a57 -M virt -pflash flash0.img -pflash flash1.img -drive if=none,file=ubuntu.img,id=hd0 -device virtio-blk-device,drive=hd0 -net user,hostfwd=tcp::2376-:2376 -net nic -nographic
+CMD qemu-system-aarch64 -m 1024 -cpu cortex-a57 -M virt -pflash flash0.img -pflash flash1.img -drive if=none,file=ubuntu.img,id=hd0 -device virtio-blk-device,drive=hd0 -net user,hostfwd=tcp::${PORT}-:2376 -net nic -nographic
