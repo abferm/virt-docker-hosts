@@ -1,0 +1,3 @@
+#!/bin/bash
+docker pull abferm/virt-puller:latest
+docker run --rm --privileged -v $(pwd):/work/ abferm/virt-puller:latest bionic armhf
